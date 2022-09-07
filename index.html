@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #txtName
+        {
+            width: 190px;
+            height: 30px;
+            margin-left: 30px;
+        }
+        #txtPhone
+        {
+            width: 190px;
+            height: 30px;
+            margin-left:30px ;
+        }
+        #txtId
+        {
+            width: 190px;
+            height: 30px;
+            margin-left:55px ;
+        }
+        #svbtn
+        {
+           margin-top: 20px;
+        }
+        #shbtn
+        {
+            margin-top: 20px;
+        }
+        #thname
+        {
+            padding-left:30px;
+            padding-right: 30px;
+        }
+        #thphone
+        {
+            padding-left:30px;
+            padding-right: 30px;
+        }
+        #thid
+        {
+            padding-left:30px;
+            padding-right: 30px;
+        }
+       #thdlt
+       {
+            padding-left:30px;
+            padding-right: 30px;
+       }
+
+    </style>
+</head>
+<body>
+    Name:
+    <input type="text" placeholder="User Name" id="txtName">
+    <br><br>
+    Phone
+    <input type="number" placeholder="Contact Number" id="txtPhone">
+    <br><br>
+    Id
+    <input type="number" placeholder=" Enter Id" id="txtId">
+    <br><br>
+    <button onclick="save()" id="svbtn">Save</button>
+    <button onclick="getvalue()" id="shbtn">show</button>
+
+    <br><br>
+  
+    <table border="3px">
+        <thead>
+            <th id="thname">Name</th>
+            <th id="thphone">Phone</th>
+            <th id="thid">Id</th>
+            <th id="thdlt">Delete</th>
+        </thead>
+        <tbody id="tbody">
+
+        </tbody>
+    </table>
+
+    <script>
+         //localStorage.clear();
+         arrName=[]
+         arrPhone=[]
+         arrId=[]
+         function save()
+         {
+            id=document.getElementById("txtId").value
+             name=document.getElementById("txtName").value
+             phone=document.getElementById("txtPhone").value
+
+             arrId.push(id)
+             arrName.push(name)
+             arrPhone.push(phone)
+             
+             localStorage.setItem("User",JSON.stringify(arrName))
+             localStorage.setItem("Mobile",JSON.stringify(arrPhone))
+             localStorage.setItem("Id",JSON.stringify(arrId))
+             
+            clean();
+            
+         }
+
+
+         function clean()
+         {
+            name=document.getElementById("txtName").value=""
+             phone=document.getElementById("txtPhone").value=""
+             id=document.getElementById("txtId").value=""
+         }
+
+          //  Extract value from the localStorage
+         function  getvalue()
+         {
+            var html=' ';
+            username=localStorage.getItem("User")
+            actualname=JSON.parse(username)
+            userphone=localStorage.getItem("Mobile")
+            actualphone=JSON.parse(userphone)
+            userid=localStorage.getItem("Id")
+            actualid=JSON.parse(userid)
+            // for(i=0;i<actualname.length;i++)
+            // {
+            //     console.log(actualname[i])+" "+  console.log(actualphone[i])+" "+console.log(actualid[i]);
+                    //loop is used to print the message on the console page
+            // }
+
+            console.log(actualname)
+            for(i=0;i<actualname.length;i++)
+            {
+                html=html+  `<tr><td>${actualname[i]}</td><td> ${actualphone[i]}</td><td> ${actualid[i]}</td> <td>Delete</td>
+</tr>`
+            }
+            document.getElementById("tbody").innerHTML=html
+            alert("I am working")
+
+         }
+
+    </script>
+</body>
+</html>
